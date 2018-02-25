@@ -8,6 +8,11 @@ Pip install tldextract, used for extracting domains from URLs in cleaning proces
     
     $ pip install tldextract
 
+
+We also need [langdetect](https://github.com/Mimino666/langdetect), a port of Googles language-detection library
+    
+    $ pip install langdetect
+
 Clone this repository
 
     $ git clone git@gitlab.com:memetic-science/Jung-Myers-tagger.git
