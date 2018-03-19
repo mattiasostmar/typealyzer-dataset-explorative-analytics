@@ -1,0 +1,1334 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{train\_and\_evaluate\_percieving\_train2100eval900\_and\_judging\_train2100eval900}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{operator}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{!}pwd
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/mos/Dropbox/memeticscience/typealyzer-dataset/notebooks/jungian\_classification
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df\PYZus{}pickle\PYZus{}path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../pickles/dataframe\PYZus{}survey\PYZus{}2018\PYZhy{}01\PYZhy{}23\PYZus{}enriched.pickle}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{indata} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}pickle}\PY{p}{(}\PY{n}{df\PYZus{}pickle\PYZus{}path}\PY{p}{)}
+        \PY{n}{indata}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual\PYZus{}temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is\PYZus{}s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    actual actual\_temp  is\_s
+        1    INFJ          nf     0
+        2    INFP          nf     0
+        3    INTP          nt     0
+        5    ENFJ          nf     0
+        10   INFP          nf     0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{indata}\PY{o}{.}\PY{n}{domain}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} tumblr       21938
+        blogspot       513
+        wordpress      468
+        Name: domain, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{indata}\PY{o}{.}\PY{n}{lang}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} en    22588
+        fr       50
+        da       34
+        de       25
+        no       23
+        Name: lang, dtype: int64
+\end{Verbatim}
+            
+    \hypertarget{filter-out-english-texts-only}{%
+\section{Filter out English texts
+only}\label{filter-out-english-texts-only}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{indata}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 22919
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{indata} \PY{o}{=} \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{lang} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{en}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{indata}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 22588
+\end{Verbatim}
+            
+    \hypertarget{add-columns-percieving-and-judging-for-evaluation-of-sn-and-tf-classifiers}{%
+\section{Add columns percieving and judging for evaluation of s/n and
+t/f
+classifiers}\label{add-columns-percieving-and-judging-for-evaluation-of-sn-and-tf-classifiers}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{indata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{indata}\PY{o}{.}\PY{n}{actual\PYZus{}temp}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{w)}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{expand}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{indata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{indata}\PY{o}{.}\PY{n}{actual\PYZus{}temp}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{w(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{w)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{expand}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{indata}\PY{p}{[}\PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{indata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{indata}\PY{p}{[}\PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{indata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} Empty DataFrame
+         Columns: [url, typealyzer, actual, e, s, t, sntf\_s, sntf\_n, sntf\_t, sntf\_f, date, text, tokens, domain, lang, datetime, func, att, funcatt, actual\_temp, is\_e, is\_i, is\_f, is\_n, is\_s, is\_t, is\_fe, is\_fi, is\_ne, is\_ni, is\_se, is\_si, is\_te, is\_ti, is\_enfj, is\_enfp, is\_entj, is\_entp, is\_esfj, is\_esfp, is\_estj, is\_estp, is\_unknown, is\_infj, is\_infp, is\_intj, is\_intp, is\_isfj, is\_isfp, is\_istj, is\_istp, negate, ppron, nonfl, i, relativ, percept, quant, affect, shehe, achieve, bio, leisure, conj, motion, posemo, adverb, home, future, negemo, number, inhib, humans, pronoun, excl, space, tentat, see, past, anx, family, present, health, verb, certain, anger, preps, swear, ingest, discrep, friend, relig, time, cause, article, body, social, assent, work, sexual, {\ldots}]
+         Index: []
+         
+         [0 rows x 117 columns]
+\end{Verbatim}
+            
+    \hypertarget{inspect-original-data-function-distributions}{%
+\section{Inspect original data function
+distributions}\label{inspect-original-data-function-distributions}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{s\PYZus{}series} \PY{o}{=} \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{perc\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{n\PYZus{}series} \PY{o}{=} \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{perc\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{t\PYZus{}series} \PY{o}{=} \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{judg\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{f\PYZus{}series} \PY{o}{=} \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{judg\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{avg\PYZus{}tkns} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{s\PYZus{}series}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{n\PYZus{}series}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{t\PYZus{}series}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{f\PYZus{}series}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         \PY{n}{avg\PYZus{}tkns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} \{'f': 488.2908894968084,
+          'n': 511.4496560721063,
+          's': 457.63189127105665,
+          't': 511.27211970074814\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{indata}\PY{o}{.}\PY{n}{perc\PYZus{}func}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} n    16864
+         s     5224
+         Name: perc\_func, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{indata}\PY{o}{.}\PY{n}{judg\PYZus{}func}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} f    12063
+         t    10025
+         Name: judg\_func, dtype: int64
+\end{Verbatim}
+            
+    \hypertarget{sample-equal-size-text-chunks-for-training-and-evaluation-data}{%
+\section{Sample equal size text chunks for training and evaluation
+data}\label{sample-equal-size-text-chunks-for-training-and-evaluation-data}}
+
+See:
+\href{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.sample.html}{Pandas
+sample()}
+
+    \hypertarget{percieving-function}{%
+\subsection{Percieving function}\label{percieving-function}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} We have 5224 cases in the smallest class s }
+         \PY{n}{perc\PYZus{}samples} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}
+                     \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{perc\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{3000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{123456}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual\PYZus{}temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{perc\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{3000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{123456}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual\PYZus{}temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+                     \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}samples}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} 6000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}func}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} s    3000
+         n    3000
+         Name: perc\_func, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}func}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} f    3363
+         t    2637
+         Name: judg\_func, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{jung\PYZus{}percieving\PYZus{}functions\PYZus{}samples\PYZus{}blogs\PYZus{}totn6000.pickle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{perc\PYZus{}samples} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{jung\PYZus{}percieving\PYZus{}functions\PYZus{}samples\PYZus{}blogs\PYZus{}totn6000.pickle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{judging-function}{%
+\subsection{Judging function}\label{judging-function}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} We have 10025 cases in the smallest class t}
+         \PY{n}{judg\PYZus{}samples} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}
+                     \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{judg\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{3000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{123456}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual\PYZus{}temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{indata}\PY{p}{[}\PY{n}{indata}\PY{o}{.}\PY{n}{judg\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{3000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{123456}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual\PYZus{}temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+                     \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}samples}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} 6000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}func}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} t    3000
+         f    3000
+         Name: judg\_func, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}func}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} n    4598
+         s    1402
+         Name: perc\_func, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{jung\PYZus{}judging\PYZus{}functions\PYZus{}samples\PYZus{}blogs\PYZus{}totn6000.pickle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{judg\PYZus{}samples} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{jung\PYZus{}judging\PYZus{}functions\PYZus{}samples\PYZus{}blogs\PYZus{}totn6000.pickle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{setup-uclassify-classifer-and-prepare-training-and-evaluation-datasets}{%
+\section{Setup uClassify classifer and prepare training and evaluation
+datasets}\label{setup-uclassify-classifer-and-prepare-training-and-evaluation-datasets}}
+
+The variable \texttt{os.environ{[}"UCLASSIFY\_WRITE"{]}} is created by
+adding a line to e.g. \texttt{\textasciitilde{}/.profile}:
+
+\texttt{export\ UCLASSIFY\_WRITE\ =\ "\textless{}your\_uclassify\_write\_key\textgreater{}"}
+
+    \hypertarget{split-percieving-samples-into-train-and-eval-subsets.}{%
+\section{Split percieving samples into train and eval
+subsets.}\label{split-percieving-samples-into-train-and-eval-subsets.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}samples}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} 6000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} prepare column to keep track of what\PYZsq{}s been used for training}
+         \PY{n}{zeros} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         \PY{n}{perc\PYZus{}samples}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{zeros}
+         \PY{n}{perc\PYZus{}samples}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}training\PYZus{}set}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}                                                     text  tokens perc\_func  \textbackslash{}
+         8623   Sonny Jooooooooon INDEX ASK PAST THEME Sonny J{\ldots}     386         s   
+         11987  Log in | Tumblr Sign up Terms Privacy Posted b{\ldots}      52         s   
+         5340   a thing of blood © hi im logan and i love the {\ldots}     440         s   
+         
+               judg\_func actual\_temp  perc\_training\_set  
+         8623          f          sf                  0  
+         11987         t          st                  0  
+         5340          f          sf                  0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{sn\PYZus{}traing\PYZus{}set\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{2100} \PY{c+c1}{\PYZsh{} e.g. 2100 is 70\PYZpc{} of 3000 samples}
+         \PY{n}{perc\PYZus{}s\PYZus{}train} \PY{o}{=} \PY{n}{perc\PYZus{}samples}\PY{p}{[}\PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{sn\PYZus{}traing\PYZus{}set\PYZus{}size}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+         \PY{n}{perc\PYZus{}n\PYZus{}train} \PY{o}{=} \PY{n}{perc\PYZus{}samples}\PY{p}{[}\PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{sn\PYZus{}traing\PYZus{}set\PYZus{}size}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+         
+         \PY{n}{perc\PYZus{}train} \PY{o}{=} \PY{n}{perc\PYZus{}s\PYZus{}train}\PY{o}{.}\PY{n}{union}\PY{p}{(}\PY{n}{perc\PYZus{}n\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{perc\PYZus{}train}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:}                                                     text  tokens perc\_func  \textbackslash{}
+         8623   Sonny Jooooooooon INDEX ASK PAST THEME Sonny J{\ldots}     386         s   
+         11987  Log in | Tumblr Sign up Terms Privacy Posted b{\ldots}      52         s   
+         5340   a thing of blood © hi im logan and i love the {\ldots}     440         s   
+         
+               judg\_func actual\_temp  perc\_training\_set  
+         8623          f          sf                  0  
+         11987         t          st                  1  
+         5340          f          sf                  1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}samples}\PY{p}{[}\PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}training\PYZus{}set} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} 4200
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Separate evaluation DataFrame}
+         \PY{n}{perc\PYZus{}eval\PYZus{}set} \PY{o}{=} \PY{n}{perc\PYZus{}samples}\PY{p}{[}\PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}training\PYZus{}set} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:}                                                     text  tokens perc\_func  \textbackslash{}
+         8623   Sonny Jooooooooon INDEX ASK PAST THEME Sonny J{\ldots}     386         s   
+         18909  Wit Beyond Measure Wit Beyond Measure Aug 14, {\ldots}     340         s   
+         7557   IT'S ALL COMIN' DOWN ON US, BOYS why is my das{\ldots}     336         s   
+         
+               judg\_func actual\_temp  perc\_training\_set  
+         8623          f          sf                  0  
+         18909         t          st                  0  
+         7557          t          st                  0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 1800
+\end{Verbatim}
+            
+    \hypertarget{train-sn-classifer}{%
+\subsection{Train SN classifer}\label{train-sn-classifer}}
+
+https://uclassify.com/manage/classifiers/jung-percieving-2100
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{def} \PY{n+nf}{train\PYZus{}jung\PYZus{}cognitive\PYZus{}functions\PYZus{}en\PYZus{}classes}\PY{p}{(}\PY{n}{func}\PY{p}{,} \PY{n}{classifier}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Presupposes that classifier is created and that setup\PYZus{}jung\PYZus{}functions\PYZus{}en\PYZus{}classes() is already run.}
+         \PY{l+s+sd}{    func: expects one of [\PYZdq{}s\PYZdq{},\PYZdq{}n\PYZdq{},\PYZdq{}t\PYZdq{},\PYZdq{}f\PYZdq{}]}
+         \PY{l+s+sd}{    classifier: expects on of [\PYZdq{}sntf\PYZdq{}, \PYZdq{}tf\PYZdq{}, \PYZdq{}sn\PYZdq{}]}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{trained\PYZus{}ix} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{text\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{if} \PY{n}{classifier} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{ix}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}func} \PY{o}{==} \PY{n}{name}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{perc\PYZus{}samples}\PY{o}{.}\PY{n}{perc\PYZus{}training\PYZus{}set} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{trained\PYZus{}ix}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ix}\PY{p}{)}
+                     \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{texts}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{\PYZcb{}}
+                     \PY{n}{header} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Content\PYZhy{}Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Authorization}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Token }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UCLASSIFY\PYZus{}WRITE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+                     
+                     \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://api.uclassify.com/v1/me/jung\PYZhy{}percieving\PYZhy{}2100/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{name} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/train}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                             \PY{n}{json} \PY{o}{=} \PY{n}{data}\PY{p}{,}
+                             \PY{n}{headers} \PY{o}{=} \PY{n}{header}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{text\PYZus{}count} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{:}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{text\PYZus{}count}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{text\PYZus{}count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 
+             \PY{k}{elif} \PY{n}{classifier} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{ix}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}func} \PY{o}{==} \PY{n}{name}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}training\PYZus{}set} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{trained\PYZus{}ix}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ix}\PY{p}{)}
+                     \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{texts}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{\PYZcb{}}
+                     \PY{n}{header} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Content\PYZhy{}Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Authorization}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Token }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UCLASSIFY\PYZus{}WRITE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+                     
+                     \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://api.uclassify.com/v1/me/jung\PYZhy{}judging\PYZhy{}2100/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{name} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/train}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                             \PY{n}{json} \PY{o}{=} \PY{n}{data}\PY{p}{,}
+                             \PY{n}{headers} \PY{o}{=} \PY{n}{header}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{text\PYZus{}count} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{:}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{text\PYZus{}count}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{text\PYZus{}count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Finished training Jung Cognitive Functions: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{trained\PYZus{}ix}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{perc\PYZus{}trained\PYZus{}ix} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{functions\PYZus{}trained\PYZus{}ix} \PY{o}{=} \PY{n}{train\PYZus{}jung\PYZus{}cognitive\PYZus{}functions\PYZus{}en\PYZus{}classes}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{classifier}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{perc\PYZus{}trained\PYZus{}ix}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{perc\PYZus{}trained\PYZus{}ix}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+s:100
+s:200
+s:300
+s:400
+s:500
+s:600
+s:700
+s:800
+s:900
+s:1000
+s:1100
+s:1200
+s:1300
+s:1400
+s:1500
+s:1600
+s:1700
+s:1800
+s:1900
+s:2000
+s:2100
+Finished training Jung Cognitive Functions: s
+n:100
+n:200
+n:300
+n:400
+n:500
+n:600
+n:700
+n:800
+n:900
+n:1000
+n:1100
+n:1200
+n:1300
+n:1400
+n:1500
+n:1600
+n:1700
+n:1800
+n:1900
+n:2000
+n:2100
+Finished training Jung Cognitive Functions: n
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{length perc\PYZus{}eval\PYZus{}set: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{length perc\PYZus{}trained\PYZus{}ix: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}trained\PYZus{}ix}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+length perc\_eval\_set: 1800
+length perc\_trained\_ix: 2
+
+    \end{Verbatim}
+
+    \hypertarget{split-judging-samples-into-train-and-eval-subsets.}{%
+\section{Split judging samples into train and eval
+subsets.}\label{split-judging-samples-into-train-and-eval-subsets.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} prepare column to keep track of what\PYZsq{}s been used for training}
+         \PY{n}{zeros} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         \PY{n}{judg\PYZus{}samples}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{zeros}
+         \PY{n}{judg\PYZus{}samples}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}training\PYZus{}set}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:}                                                     text  tokens perc\_func  \textbackslash{}
+         22981  it is what it is About Name: Heidi Age:16 Wher{\ldots}     565         s   
+         24378  https://www.tumblr.com/themes/by/leentheme htt{\ldots}     582         n   
+         5187   three things cannot be long hidden © three thi{\ldots}     516         n   
+         
+               judg\_func actual\_temp  judg\_training\_set  
+         22981         t          st                  0  
+         24378         t          nt                  0  
+         5187          t          nt                  0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{tf\PYZus{}traing\PYZus{}set\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{2100} \PY{c+c1}{\PYZsh{} e.g. 2100 is 70\PYZpc{} of 3000 samples}
+         \PY{n}{judg\PYZus{}t\PYZus{}train} \PY{o}{=} \PY{n}{judg\PYZus{}samples}\PY{p}{[}\PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{tf\PYZus{}traing\PYZus{}set\PYZus{}size}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+         \PY{n}{judg\PYZus{}f\PYZus{}train} \PY{o}{=} \PY{n}{judg\PYZus{}samples}\PY{p}{[}\PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}func} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{tf\PYZus{}traing\PYZus{}set\PYZus{}size}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+         
+         \PY{n}{judg\PYZus{}train} \PY{o}{=} \PY{n}{judg\PYZus{}t\PYZus{}train}\PY{o}{.}\PY{n}{union}\PY{p}{(}\PY{n}{judg\PYZus{}f\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{judg\PYZus{}train}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:}                                                     text  tokens perc\_func  \textbackslash{}
+         22981  it is what it is About Name: Heidi Age:16 Wher{\ldots}     565         s   
+         24378  https://www.tumblr.com/themes/by/leentheme htt{\ldots}     582         n   
+         5187   three things cannot be long hidden © three thi{\ldots}     516         n   
+         4307   none gf with left feel 12442 ★ August 1st, 201{\ldots}     499         s   
+         2606   God, Faith, \& Fitness God, Faith, \& Fitness Me{\ldots}     924         n   
+         18214  big hype, big letdown ♡ i'm charlotte and i li{\ldots}     101         s   
+         10718  Love the life you live Live the life you love {\ldots}     353         n   
+         20277  ❤❤❤ - - - - - ♚ - - | momo | 14 | ♎ | ESTJ | |{\ldots}     473         s   
+         846    Cynically Marvelous | It's Axiomatic. Cynicall{\ldots}    6973         n   
+         16405  I'll just pretend that youth will never end I'{\ldots}     693         n   
+         11753  Something-or-other Something-or-other Let's ju{\ldots}     483         n   
+         18004  / .\_> | | | '\_>/ .\_>| . \textbackslash{}/ .\_>| || |/ .\_> | \_/{\ldots}     180         n   
+         23577  WINTERFELL About Mariele. 21. Germany. ISTJ. M{\ldots}     102         s   
+         4829   ʕ•ᴥ•ʔ The bears are in 684,715 plays we-r-who-{\ldots}     445         s   
+         4225                                     XANADU XANADU         2         n   
+         
+               judg\_func actual\_temp  judg\_training\_set  
+         22981         t          st                  1  
+         24378         t          nt                  1  
+         5187          t          nt                  1  
+         4307          t          st                  1  
+         2606          t          nt                  1  
+         18214         t          st                  1  
+         10718         t          nt                  1  
+         20277         t          st                  1  
+         846           t          nt                  1  
+         16405         t          nt                  0  
+         11753         t          nt                  1  
+         18004         t          nt                  1  
+         23577         t          st                  1  
+         4829          t          st                  1  
+         4225          t          nt                  1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} Separate evaluation DataFrame}
+         \PY{n}{judg\PYZus{}eval\PYZus{}set} \PY{o}{=} \PY{n}{judg\PYZus{}samples}\PY{p}{[}\PY{n}{judg\PYZus{}samples}\PY{o}{.}\PY{n}{judg\PYZus{}training\PYZus{}set} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:}                                                     text  tokens perc\_func  \textbackslash{}
+         16405  I'll just pretend that youth will never end I'{\ldots}     693         n   
+         24806  The Queen The Queen Raquel Alexis | 17 | FL | {\ldots}      77         n   
+         15132  this could have been worse this could have bee{\ldots}     492         n   
+         
+               judg\_func actual\_temp  judg\_training\_set  
+         16405         t          nt                  0  
+         24806         t          nt                  0  
+         15132         t          nt                  0  
+\end{Verbatim}
+            
+    \hypertarget{train-tf-classifier}{%
+\subsection{Train TF classifier}\label{train-tf-classifier}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{tf\PYZus{}trained\PYZus{}ix} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{tf\PYZus{}trained\PYZus{}ix} \PY{o}{=} \PY{n}{train\PYZus{}jung\PYZus{}cognitive\PYZus{}functions\PYZus{}en\PYZus{}classes}\PY{p}{(}\PY{n}{name}\PY{p}{,} \PY{n}{classifier}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{tf\PYZus{}trained\PYZus{}ix}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tf\PYZus{}trained\PYZus{}ix}\PY{p}{)}
+             \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+t:100
+t:200
+t:300
+t:400
+t:500
+t:600
+t:700
+t:800
+t:900
+t:1000
+t:1100
+t:1200
+t:1300
+t:1400
+t:1500
+t:1600
+t:1700
+t:1800
+t:1900
+t:2000
+t:2100
+t:2200
+t:2300
+t:2400
+t:2500
+t:2600
+t:2700
+t:2800
+t:2900
+t:3000
+t:3100
+t:3200
+t:3300
+t:3400
+t:3500
+t:3600
+t:3700
+t:3800
+t:3900
+t:4000
+t:4100
+t:4200
+t:4300
+t:4400
+t:4500
+t:4600
+t:4700
+t:4800
+t:4900
+t:5000
+t:5100
+t:5200
+t:5300
+t:5400
+t:5500
+t:5600
+t:5700
+t:5800
+t:5900
+t:6000
+t:6100
+t:6200
+t:6300
+t:6400
+t:6500
+t:6600
+t:6700
+t:6800
+t:6900
+t:7000
+Finished training Jung Cognitive Functions.
+f:100
+f:200
+f:300
+f:400
+f:500
+f:600
+f:700
+f:800
+f:900
+f:1000
+f:1100
+f:1200
+f:1300
+f:1400
+f:1500
+f:1600
+f:1700
+f:1800
+f:1900
+f:2000
+f:2100
+f:2200
+f:2300
+f:2400
+f:2500
+f:2600
+f:2700
+f:2800
+f:2900
+f:3000
+f:3100
+f:3200
+f:3300
+f:3400
+f:3500
+f:3600
+f:3700
+f:3800
+f:3900
+f:4000
+f:4100
+f:4200
+f:4300
+f:4400
+f:4500
+f:4600
+f:4700
+f:4800
+f:4900
+f:5000
+f:5100
+f:5200
+f:5300
+f:5400
+f:5500
+f:5600
+f:5700
+f:5800
+f:5900
+f:6000
+f:6100
+f:6200
+f:6300
+f:6400
+f:6500
+f:6600
+f:6700
+f:6800
+f:6900
+f:7000
+Finished training Jung Cognitive Functions.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{length judg\PYZus{}eval\PYZus{}set: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{length tf\PYZus{}trained\PYZus{}ix: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tf\PYZus{}trained\PYZus{}ix}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+length judg\_eval\_set: 1800
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-48-9a63d8973ddd> in <module>()
+          1 print("length judg\_eval\_set: \{\}".format(len(judg\_eval\_set)))
+    ----> 2 print("length tf\_trained\_ix: \{\}".format(len(tf\_trained\_ix)))
+    
+
+        NameError: name 'tf\_trained\_ix' is not defined
+
+    \end{Verbatim}
+
+    \hypertarget{classify-percieving-function}{%
+\section{Classify percieving
+function}\label{classify-percieving-function}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k}{def} \PY{n+nf}{classify\PYZus{}jung\PYZus{}percieving\PYZus{}function\PYZus{}of\PYZus{}text}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Does what it says, pretty much.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{header} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Content\PYZhy{}Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Authorization}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Token }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UCLASSIFY\PYZus{}READ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+             \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{texts}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{n}{text}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} send a one\PYZhy{}item list for now, since we don\PYZsq{}t have a feel for sizes}
+             \PY{n}{result} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://api.uclassify.com/v1/prfekt/jungian\PYZhy{}cognitive\PYZhy{}function\PYZhy{}sensing\PYZhy{}intuition/classify}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                \PY{n}{json} \PY{o}{=} \PY{n}{data}\PY{p}{,}
+                                \PY{n}{headers} \PY{o}{=} \PY{n}{header}\PY{p}{)}
+             \PY{n}{json\PYZus{}result} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+             
+             \PY{n}{res\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{for} \PY{n}{classItem} \PY{o+ow}{in} \PY{n}{json\PYZus{}result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classification}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{res\PYZus{}dict}\PY{p}{[}\PY{n}{classItem}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{className}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{classItem}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             
+             \PY{n}{sorted\PYZus{}dict} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{res\PYZus{}dict}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{operator}\PY{o}{.}\PY{n}{itemgetter}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{k}{return} \PY{n}{sorted\PYZus{}dict}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{zeros} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sn\PYZus{}results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{row\PYZus{}cnt} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k}{for} \PY{n}{ix}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{row\PYZus{}cnt}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{end}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{res} \PY{o}{=} \PY{n}{classify\PYZus{}jung\PYZus{}percieving\PYZus{}function\PYZus{}of\PYZus{}text}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{sn\PYZus{}results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{res}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{row\PYZus{}cnt} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+row: 1800 of 1800
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sn\PYZus{}results}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} 1800
+\end{Verbatim}
+            
+    Add the percieving classification results to the evaulation dataset
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{perc\PYZus{}eval\PYZus{}set} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{,}
+                               \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sn\PYZus{}results}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+                              \PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual\PYZus{}temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sn}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classification\PYZus{}results\PYZus{}percieving\PYZus{}function\PYZus{}blogs\PYZus{}n5000\PYZus{}dataframe.pickle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                                    text  tokens perc\_func  \textbackslash{}
+8623   Sonny Jooooooooon INDEX ASK PAST THEME Sonny J{\ldots}     386         s   
+18909  Wit Beyond Measure Wit Beyond Measure Aug 14, {\ldots}     340         s   
+7557   IT'S ALL COMIN' DOWN ON US, BOYS why is my das{\ldots}     336         s   
+
+      judg\_func actual\_temp  perc\_training\_set sn  
+8623          f          sf                  0  s  
+18909         t          st                  0  n  
+7557          t          st                  0  s  
+
+    \end{Verbatim}
+
+    \hypertarget{classify-tf}{%
+\section{Classify TF}\label{classify-tf}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k}{def} \PY{n+nf}{classify\PYZus{}jung\PYZus{}judging\PYZus{}function\PYZus{}of\PYZus{}text}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Does what it says, pretty much.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{header} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Content\PYZhy{}Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Authorization}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Token }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UCLASSIFY\PYZus{}READ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+             \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{texts}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{n}{text}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} send a one\PYZhy{}item list for now, since we don\PYZsq{}t have a feel for sizes}
+             \PY{n}{result} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{post}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://api.uclassify.com/v1/prfekt/jungian\PYZhy{}cognitive\PYZhy{}function\PYZhy{}thinking\PYZhy{}feeling/classify}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                \PY{n}{json} \PY{o}{=} \PY{n}{data}\PY{p}{,}
+                                \PY{n}{headers} \PY{o}{=} \PY{n}{header}\PY{p}{)}
+             \PY{n}{json\PYZus{}result} \PY{o}{=} \PY{n}{result}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+             
+             \PY{n}{res\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{for} \PY{n}{classItem} \PY{o+ow}{in} \PY{n}{json\PYZus{}result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classification}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{res\PYZus{}dict}\PY{p}{[}\PY{n}{classItem}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{className}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{classItem}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             
+             \PY{n}{sorted\PYZus{}dict} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{res\PYZus{}dict}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{operator}\PY{o}{.}\PY{n}{itemgetter}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{k}{return} \PY{n}{sorted\PYZus{}dict}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{zeros} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tf\PYZus{}results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{row\PYZus{}cnt} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k}{for} \PY{n}{ix}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{row: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{row\PYZus{}cnt}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{end}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{res} \PY{o}{=} \PY{n}{classify\PYZus{}jung\PYZus{}judging\PYZus{}function\PYZus{}of\PYZus{}text}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{tf\PYZus{}results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{res}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{row\PYZus{}cnt} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+row: 1800 of 1800
+    \end{Verbatim}
+
+    Add judging classification results to evaluation set
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{judg\PYZus{}eval\PYZus{}set} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{,}
+                               \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{tf\PYZus{}results}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+                              \PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tokens}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perc\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}func}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{actual\PYZus{}temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{judg\PYZus{}training\PYZus{}set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classification\PYZus{}results\PYZus{}judging\PYZus{}function\PYZus{}blogs\PYZus{}n10000\PYZus{}dataframe.pickle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                                    text  tokens perc\_func  \textbackslash{}
+16405  I'll just pretend that youth will never end I'{\ldots}     693         n   
+24806  The Queen The Queen Raquel Alexis | 17 | FL | {\ldots}      77         n   
+15132  this could have been worse this could have bee{\ldots}     492         n   
+
+      judg\_func actual\_temp  judg\_training\_set tf  
+16405         t          nt                  0  t  
+24806         t          nt                  0  t  
+15132         t          nt                  0  t  
+
+    \end{Verbatim}
+
+    \hypertarget{evaluation-of-percieving-classification}{%
+\section{Evaluation of percieving
+classification}\label{evaluation-of-percieving-classification}}
+
+    \hypertarget{classification-report-percieving}{%
+\subsection{Classification report
+percieving}\label{classification-report-percieving}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{sn\PYZus{}cr} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perc\PYZus{}func}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sn\PYZus{}cr}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+          n       0.87      0.86      0.87       900
+          s       0.86      0.88      0.87       900
+
+avg / total       0.87      0.87      0.87      1800
+
+
+    \end{Verbatim}
+
+    \hypertarget{percieving-accuracy}{%
+\subsection{Percieving accuracy}\label{percieving-accuracy}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{sn\PYZus{}accuracy} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{perc\PYZus{}func}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sn\PYZus{}accuracy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.8688888888888889
+
+    \end{Verbatim}
+
+    \hypertarget{percieving-kappa}{%
+\subsection{Percieving Kappa}\label{percieving-kappa}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{sn\PYZus{}kappa} \PY{o}{=} \PY{n}{sn\PYZus{}accuracy} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{perc\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sn\PYZus{}kappa}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.8688891977024273
+
+    \end{Verbatim}
+
+    \hypertarget{evaluation-of-judging-classificiation}{%
+\section{Evaluation of judging
+classificiation}\label{evaluation-of-judging-classificiation}}
+
+    \hypertarget{classification-report-judging}{%
+\subsection{Classification report
+judging}\label{classification-report-judging}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{tf\PYZus{}cr} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{judg\PYZus{}func}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tf\PYZus{}cr}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+          f       0.87      0.90      0.88       900
+          t       0.89      0.86      0.88       900
+
+avg / total       0.88      0.88      0.88      1800
+
+
+    \end{Verbatim}
+
+    \hypertarget{judging-accuracy}{%
+\subsection{Judging accuracy}\label{judging-accuracy}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{tf\PYZus{}accuracy} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{judg\PYZus{}func}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tf\PYZus{}accuracy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.8794444444444445
+
+    \end{Verbatim}
+
+    \hypertarget{judging-kappa}{%
+\subsection{Judging Kappa}\label{judging-kappa}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{tf\PYZus{}kappa} \PY{o}{=} \PY{n}{tf\PYZus{}accuracy} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{judg\PYZus{}eval\PYZus{}set}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tf\PYZus{}kappa}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.8794447532579829
+
+    \end{Verbatim}
+
+    \hypertarget{conclusion-and-further-research}{%
+\section{Conclusion and further
+research}\label{conclusion-and-further-research}}
+
+\begin{itemize}
+\item
+  Two dichotomic classifiers seems to improve the results tremendously.
+\item
+  Is the experiment done correctly? Peer-review the code.
+\item
+  Check what words, and later, phrases are the most influential for each
+  class.
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
